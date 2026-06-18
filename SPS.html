@@ -5,17 +5,23 @@
     <title>Steen Papier Schaar</title>
 </head>
 <body>
-    <h1>Steen Papier Schaar</h1>
 
-    <p>Computer: <span id="computer"></span></p>
-    <p>Jouw keuze: <span id="human"></span></p>
-    <p>Uitkomst: <span id="result"></span></p>
+<div class="game">
+  <h1>Steen • Papier • Schaar</h1>
 
-    <button id="steen">Steen</button>
-    <button id="papier">Papier</button>
-    <button id="schaar">Schaar</button>
+  <div class="buttons">
+    <button data-choice="steen">🪨 Steen</button>
+    <button data-choice="papier">📄 Papier</button>
+    <button data-choice="schaar">✂️ Schaar</button>
+  </div>
 
-    <script src="script.js"></script>
+  <div class="result">
+    <p id="player">Jij: -</p>
+    <p id="computer">Computer: -</p>
+    <h2 id="winner">Maak een keuze...</h2>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
-<script src="script.js"></script>
