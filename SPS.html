@@ -3,19 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <title>Steen Papier Schaar</title>
+
+    <style>
+        /* Algemene layout */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Game container */
+        .game {
+            background: #2b2b2b;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .game h1 {
+            margin-bottom: 20px;
+            font-size: 26px;
+            letter-spacing: 1px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .buttons button {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+            width: 30%;
+        }
+
+        .buttons button:hover {
+            background: #666;
+            transform: translateY(-3px);
+        }
+
+        /* Result sectie */
+        .result p, .result h2 {
+            margin: 8px 0;
+        }
+
+        /* Win animatie (groene glow) */
+        .win {
+            animation: winAnim 0.6s ease;
+        }
+
+        @keyframes winAnim {
+            0%   { transform: scale(1); box-shadow: 0 0 0px green; }
+            50%  { transform: scale(1.15); box-shadow: 0 0 20px green; }
+            100% { transform: scale(1); box-shadow: 0 0 0px green; }
+        }
+
+        /* Verlies animatie (rode shake) */
+        .lose {
+            animation: loseAnim 0.4s ease;
+        }
+
+        @keyframes loseAnim {
+            0%   { transform: translateX(0); }
+            25%  { transform: translateX(-8px); }
+            50%  { transform: translateX(8px); }
+            75%  { transform: translateX(-8px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Gelijkspel (gele pulse) */
+        .draw {
+            animation: drawAnim 0.6s ease;
+        }
+
+        @keyframes drawAnim {
+            0%   { transform: scale(1); opacity: 1; }
+            50%  { transform: scale(1.1); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Steen Papier Schaar</h1>
 
-    <p>Computer: <span id="computer"></span></p>
-    <p>Jouw keuze: <span id="human"></span></p>
-    <p>Uitkomst: <span id="result"></span></p>
+<div class="game">
+  <h1>Steen • Papier • Schaar</h1>
 
-    <button id="steen">Steen</button>
-    <button id="papier">Papier</button>
-    <button id="schaar">Schaar</button>
+  <div class="buttons">
+    <button data-choice="steen">🪨 Steen</button>
+    <button data-choice="papier">📄 Papier</button>
+    <button data-choice="schaar">✂️ Schaar</button>
+  </div>
 
-    <script src="script.js"></script>
+  <div class="result">
+    <p id="player">Jij: -</p>
+    <p id="computer">Computer: -</p>
+    <h2 id="winner">Maak een keuze...</h2>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
-<script src="script.js"></script>

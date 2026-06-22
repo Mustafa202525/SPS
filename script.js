@@ -1,60 +1,52 @@
-// Span elements
-const humanOutput = document.querySelector("#human");
-const computerOutput = document.querySelector("#computer");
-const resultOutput = document.querySelector("#result");
+// Alle knoppen selecteren
+const buttons = document.querySelectorAll(".buttons button");
 
-// Buttons
-const steenBtn = document.querySelector("#steen");
-const papierBtn = document.querySelector("#papier");
-const schaarBtn = document.querySelector("#schaar");
+// UI elementen
+const playerText = document.getElementById("player");
+const computerText = document.getElementById("computer");
+const winnerText = document.getElementById("winner");
 
-// Variabelen
-let humanChoice = "";
-let computerChoice = "";
+// Mogelijke keuzes
+const choices = ["steen", "papier", "schaar"];
 
-// Starttekst
-humanOutput.innerHTML = "Jouw keuze komt hier, maak je keuze!";
-computerOutput.innerHTML = "";
-resultOutput.innerHTML = "";
+// Event listener voor elke knop
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        const playerChoice = button.dataset.choice;
+        const computerChoice = choices[Math.floor(Math.random() * 3)];
 
-// Event listeners
-steenBtn.addEventListener("click", function () {
-    humanChoice = "steen";
-    humanOutput.innerHTML = humanChoice;
-    playRound();
+        // Toon keuzes
+        playerText.textContent = "Jij: " + playerChoice;
+        computerText.textContent = "Computer: " + computerChoice;
+
+        // Bepaal winnaar
+        const result = determineWinner(playerChoice, computerChoice);
+        winnerText.textContent = result;
+
+        // ⭐ SPECIAL: Animatie toevoegen
+        winnerText.classList.remove("win", "lose", "draw");
+
+        if (result === "Jij wint!") {
+            winnerText.classList.add("win");
+        } else if (result === "Computer wint!") {
+            winnerText.classList.add("lose");
+        } else {
+            winnerText.classList.add("draw");
+        }
+    });
 });
 
-papierBtn.addEventListener("click", function () {
-    humanChoice = "papier";
-    humanOutput.innerHTML = humanChoice;
-    playRound();
-});
+// Winnaar functie
+function determineWinner(player, computer) {
+    if (player === computer) return "Gelijkspel!";
 
-schaarBtn.addEventListener("click", function () {
-    humanChoice = "schaar";
-    humanOutput.innerHTML = humanChoice;
-    playRound();
-});
-
-// Random computer keuze + uitkomst
-function playRound() {
-    const randomNumber = Math.floor(Math.random() * 3) + 1;
-
-    if (randomNumber === 1) computerChoice = "steen";
-    if (randomNumber === 2) computerChoice = "papier";
-    if (randomNumber === 3) computerChoice = "schaar";
-
-    computerOutput.innerHTML = computerChoice;
-
-    if (humanChoice === computerChoice) {
-        resultOutput.innerHTML = "Gelijkspel!";
-    } else if (
-        (humanChoice === "steen" && computerChoice === "schaar") ||
-        (humanChoice === "papier" && computerChoice === "steen") ||
-        (humanChoice === "schaar" && computerChoice === "papier")
+    if (
+        (player === "steen" && computer === "schaar") ||
+        (player === "papier" && computer === "steen") ||
+        (player === "schaar" && computer === "papier")
     ) {
-        resultOutput.innerHTML = "Je wint!";
-    } else {
-        resultOutput.innerHTML = "Computer wint!";
+        return "Jij wint!";
     }
+
+    return "Computer wint!";
 }
