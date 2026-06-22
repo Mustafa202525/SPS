@@ -33,6 +33,7 @@ buttons.forEach(button => {
         } else {
             winnerText.classList.add("draw");
         }
+
     });
 });
 
